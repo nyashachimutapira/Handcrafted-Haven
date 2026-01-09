@@ -1,0 +1,75 @@
+const featuredProducts = [
+  {
+    id: 1,
+    name: "Handmade Ceramic Vase",
+    price: 85.0,
+    image: "/images/placeholder-1.jpg",
+    seller: "Pottery Studio",
+    rating: 4.8,
+  },
+  {
+    id: 2,
+    name: "Artisan Wood Cutting Board",
+    price: 65.0,
+    image: "/images/placeholder-2.jpg",
+    seller: "Woodcraft Co",
+    rating: 4.9,
+  },
+  {
+    id: 3,
+    name: "Silver Handcrafted Bracelet",
+    price: 120.0,
+    image: "/images/placeholder-3.jpg",
+    seller: "Jewelry Artisans",
+    rating: 4.7,
+  },
+  {
+    id: 4,
+    name: "Woven Wall Tapestry",
+    price: 95.0,
+    image: "/images/placeholder-4.jpg",
+    seller: "Textile Weavers",
+    rating: 4.8,
+  },
+];
+
+export default function FeaturedProducts() {
+  return (
+    <section className="w-full py-16 bg-light-bg">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-3xl font-bold text-primary mb-12 text-center">
+          Featured Products
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {featuredProducts.map((product) => (
+            <article
+              key={product.id}
+              className="bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 overflow-hidden"
+            >
+              <div className="bg-border h-48 flex items-center justify-center">
+                <span className="text-gray-400 text-4xl">📷</span>
+              </div>
+              <div className="p-4">
+                <h3 className="font-semibold text-primary mb-2">
+                  {product.name}
+                </h3>
+                <p className="text-sm text-gray-600 mb-3">{product.seller}</p>
+                <div className="flex items-center justify-between">
+                  <span className="text-lg font-bold text-primary">
+                    ${product.price}
+                  </span>
+                  <span className="text-sm text-yellow-500">
+                    ⭐ {product.rating}
+                  </span>
+                </div>
+                <button className="w-full mt-4 bg-primary hover:bg-accent text-white font-semibold py-2 rounded transition duration-300">
+                  View Details
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
