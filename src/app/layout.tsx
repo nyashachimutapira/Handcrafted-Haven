@@ -30,7 +30,9 @@ export default function RootLayout({
         <meta charSet="utf-8" />
         <meta name="theme-color" content="#8B7355" />
       </head>
-      <body className={inter.variable}>{children}</body>
+      <body className={inter.variable} suppressHydrationWarning>
+        {children}
+      </body>
     </html>
   );
 }
