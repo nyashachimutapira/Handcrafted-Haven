@@ -1,0 +1,14 @@
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="400" fill="#D2B48C"/>
+  <text x="200" y="180" font-family="Arial" font-size="24" fill="#8B7355" text-anchor="middle" font-weight="bold">
+    Wall Tapestry
+  </text>
+  <text x="200" y="220" font-family="Arial" font-size="16" fill="#A0826D" text-anchor="middle">
+    Woven Textile Art
+  </text>
+  <rect x="100" y="100" width="200" height="120" fill="#8B7355" opacity="0.15"/>
+  <line x1="140" y1="100" x2="140" y2="220" stroke="#8B7355" stroke-width="2" opacity="0.2"/>
+  <line x1="180" y1="100" x2="180" y2="220" stroke="#8B7355" stroke-width="2" opacity="0.2"/>
+  <line x1="220" y1="100" x2="220" y2="220" stroke="#8B7355" stroke-width="2" opacity="0.2"/>
+  <line x1="260" y1="100" x2="260" y2="220" stroke="#8B7355" stroke-width="2" opacity="0.2"/>
+</svg>

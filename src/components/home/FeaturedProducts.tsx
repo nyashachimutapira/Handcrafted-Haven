@@ -3,7 +3,7 @@ const featuredProducts = [
     id: 1,
     name: "Handmade Ceramic Vase",
     price: 85.0,
-    image: "/images/products/ceramic-vase.jpg",
+    image: "/images/products/ceramic-vase.svg",
     seller: "Pottery Studio",
     rating: 4.8,
   },
@@ -11,7 +11,7 @@ const featuredProducts = [
     id: 2,
     name: "Artisan Wood Cutting Board",
     price: 65.0,
-    image: "/images/products/wood-cutting-board.jpg",
+    image: "/images/products/wood-cutting-board.svg",
     seller: "Woodcraft Co",
     rating: 4.9,
   },
@@ -19,7 +19,7 @@ const featuredProducts = [
     id: 3,
     name: "Silver Handcrafted Bracelet",
     price: 120.0,
-    image: "/images/products/silver-bracelet.jpg",
+    image: "/images/products/silver-bracelet.svg",
     seller: "Jewelry Artisans",
     rating: 4.7,
   },
@@ -27,14 +27,16 @@ const featuredProducts = [
     id: 4,
     name: "Woven Wall Tapestry",
     price: 95.0,
-    image: "/images/products/wall-tapestry.jpg",
+    image: "/images/products/wall-tapestry.svg",
     seller: "Textile Weavers",
     rating: 4.8,
   },
 ];
 
-// Note: Add real images to public/images/products/ folder
-// Download from Unsplash: https://unsplash.com/search/handmade
+// Note: SVG placeholders included. To add real images:
+// 1. Run: node scripts/download-images.js
+// 2. Or manually save JPG files to public/images/products/
+// 3. Update image paths above (e.g., ceramic-vase.jpg)
 
 export default function FeaturedProducts() {
   return (
