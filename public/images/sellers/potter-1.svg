@@ -1,8 +1,0 @@
-<svg width="150" height="150" xmlns="http://www.w3.org/2000/svg">
-  <rect width="150" height="150" fill="#D2B48C"/>
-  <circle cx="75" cy="45" r="25" fill="#8B7355"/>
-  <path d="M 50 75 Q 50 60 75 60 Q 100 60 100 75 L 100 120 Q 100 130 75 130 Q 50 130 50 120 Z" fill="#8B7355"/>
-  <text x="75" y="145" font-family="Arial" font-size="10" fill="#A0826D" text-anchor="middle">
-    Seller
-  </text>
-</svg>

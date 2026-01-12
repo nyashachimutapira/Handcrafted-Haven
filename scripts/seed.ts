@@ -41,9 +41,9 @@ async function main() {
 
   const seller2 = await prisma.user.create({
     data: {
-      email: 'seller2@example.com',
+      email: 'muto@gmail.com',
       password: await hashPassword('password123'),
-      name: 'Jewelry Artisans',
+      name: 'Mercy Muto',
       role: 'SELLER',
       sellerProfile: {
         create: {
@@ -56,9 +56,9 @@ async function main() {
 
   const buyer = await prisma.user.create({
     data: {
-      email: 'buyer@example.com',
+      email: 'tapedzaj@mail.com',
       password: await hashPassword('password123'),
-      name: 'John Doe',
+      name: 'John Tapedza',
       role: 'BUYER',
     },
   });
