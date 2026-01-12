@@ -46,8 +46,15 @@ export default function FeaturedProducts() {
               key={product.id}
               className="bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 overflow-hidden"
             >
-              <div className="bg-border h-48 flex items-center justify-center">
-                <span className="text-gray-400 text-4xl">📷</span>
+              <div className="bg-border h-48 flex items-center justify-center overflow-hidden">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect fill='%23D2B48C' width='400' height='400'/%3E%3Ctext x='200' y='200' font-family='Arial' font-size='24' fill='%238B7355' text-anchor='middle'%3EImage Not Found%3C/text%3E%3C/svg%3E";
+                  }}
+                />
               </div>
               <div className="p-4">
                 <h3 className="font-semibold text-primary mb-2">
