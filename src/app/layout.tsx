@@ -1,8 +1,13 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "../styles/globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1.0,
+};
 
 export const metadata: Metadata = {
   title: "Handcrafted Haven - Artisan Marketplace",
@@ -16,7 +21,6 @@ export const metadata: Metadata = {
     "handcrafted",
     "local",
   ],
-  viewport: "width=device-width, initial-scale=1.0",
 };
 
 export default function RootLayout({

@@ -1,3 +1,5 @@
+'use client';
+
 const featuredProducts = [
   {
     id: 1,
