@@ -76,18 +76,6 @@ async function main() {
     },
   });
 
-  const product2 = await prisma.product.create({
-    data: {
-      title: 'Silver Handcrafted Bracelet',
-      description: 'Elegant silver bracelet with intricate designs',
-      price: 120.0,
-      categoryId: 'jewelry',
-      sellerId: seller2.id,
-      images: ['https://via.placeholder.com/300x300?text=Silver+Bracelet'],
-      quantity: 10,
-    },
-  });
-
   // Create sample reviews
   await prisma.review.create({
     data: {
