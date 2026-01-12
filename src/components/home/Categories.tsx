@@ -1,10 +1,12 @@
+'use client';
+
 const categories = [
-  { id: 1, name: "Jewelry", icon: "💍" },
-  { id: 2, name: "Ceramics", icon: "🏺" },
-  { id: 3, name: "Woodcraft", icon: "🪵" },
-  { id: 4, name: "Textiles", icon: "🧵" },
-  { id: 5, name: "Glasswork", icon: "🔮" },
-  { id: 6, name: "Home Decor", icon: "🏠" },
+  { id: 1, name: "Jewelry", image: "/images/silver-bracelet..jpg" },
+  { id: 2, name: "Ceramics", image: "/images/ceramic-vase.jpg" },
+  { id: 3, name: "Woodcraft", image: "/images/wood-cutting-board.jpg" },
+  { id: 4, name: "Textiles", image: "/images/taxitile.jpg" },
+  { id: 5, name: "Glasswork", image: "/images/glasswork.jpg" },
+  { id: 6, name: "Home Decor", image: "/images/homedeco.jpg" },
 ];
 
 export default function Categories() {
@@ -18,9 +20,13 @@ export default function Categories() {
           {categories.map((category) => (
             <button
               key={category.id}
-              className="flex flex-col items-center justify-center p-6 rounded-lg border-2 border-secondary hover:border-primary hover:bg-light-bg transition duration-300"
+              className="flex flex-col items-center justify-center p-6 rounded-lg border-2 border-secondary hover:border-primary hover:bg-light-bg transition duration-300 overflow-hidden"
             >
-              <span className="text-4xl mb-2">{category.icon}</span>
+              <img
+                src={category.image}
+                alt={category.name}
+                className="w-16 h-16 object-cover rounded-lg mb-2"
+              />
               <span className="text-sm font-medium text-primary text-center">
                 {category.name}
               </span>
