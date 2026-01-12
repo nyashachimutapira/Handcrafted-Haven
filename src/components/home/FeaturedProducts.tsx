@@ -3,7 +3,7 @@ const featuredProducts = [
     id: 1,
     name: "Handmade Ceramic Vase",
     price: 85.0,
-    image: "/images/placeholder-1.jpg",
+    image: "/images/products/ceramic-vase.jpg",
     seller: "Pottery Studio",
     rating: 4.8,
   },
@@ -11,7 +11,7 @@ const featuredProducts = [
     id: 2,
     name: "Artisan Wood Cutting Board",
     price: 65.0,
-    image: "/images/placeholder-2.jpg",
+    image: "/images/products/wood-cutting-board.jpg",
     seller: "Woodcraft Co",
     rating: 4.9,
   },
@@ -19,7 +19,7 @@ const featuredProducts = [
     id: 3,
     name: "Silver Handcrafted Bracelet",
     price: 120.0,
-    image: "/images/placeholder-3.jpg",
+    image: "/images/products/silver-bracelet.jpg",
     seller: "Jewelry Artisans",
     rating: 4.7,
   },
@@ -27,11 +27,14 @@ const featuredProducts = [
     id: 4,
     name: "Woven Wall Tapestry",
     price: 95.0,
-    image: "/images/placeholder-4.jpg",
+    image: "/images/products/wall-tapestry.jpg",
     seller: "Textile Weavers",
     rating: 4.8,
   },
 ];
+
+// Note: Add real images to public/images/products/ folder
+// Download from Unsplash: https://unsplash.com/search/handmade
 
 export default function FeaturedProducts() {
   return (
