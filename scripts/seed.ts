@@ -12,7 +12,7 @@ async function main() {
   await prisma.user.deleteMany();
 
   // Create categories
-  const categories = await prisma.category.createMany({
+  await prisma.category.createMany({
     data: [
       { name: 'Jewelry', slug: 'jewelry' },
       { name: 'Ceramics', slug: 'ceramics' },
