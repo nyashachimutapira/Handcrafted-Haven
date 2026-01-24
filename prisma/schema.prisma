@@ -11,18 +11,20 @@ datasource db {
 }
 
 model User {
-  id        String     @id @default(cuid())
-  email     String     @unique
-  password  String
-  name      String
-  role      UserRole   @default(BUYER)
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  id            String          @id @default(cuid())
+  email         String          @unique
+  password      String
+  name          String
+  role          UserRole        @default(BUYER)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
 
-  // Seller-specific fields
+  // Relationships
   sellerProfile SellerProfile?
   products      Product[]
   reviews       Review[]
+  orders        Order[]
+  cart          Cart?
 }
 
 enum UserRole {
@@ -31,16 +33,7 @@ enum UserRole {
   ADMIN
 }
 
-model SellerProfile {
-  id          String   @id @default(cuid())
-  userId      String   @unique
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  bio         String?
-  image       String?
-  verified    Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
+
 
 model Category {
   id       String    @id @default(cuid())
@@ -50,20 +43,26 @@ model Category {
 }
 
 model Product {
-  id          String   @id @default(cuid())
+  id          String     @id @default(cuid())
   title       String
   description String
   price       Float
   categoryId  String
-  category    Category @relation(fields: [categoryId], references: [id])
+  category    Category   @relation(fields: [categoryId], references: [id])
   sellerId    String
-  seller      User     @relation(fields: [sellerId], references: [id], onDelete: Cascade)
-  images      String[] // Array of image URLs
-  quantity    Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  seller      User       @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  images      String[]
+  stock       Int        @default(0)
+  published   Boolean    @default(false)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
 
-  reviews Review[]
+  reviews  Review[]
+  cartItems CartItem[]
+  orderItems OrderItem[]
+
+  @@index([sellerId])
+  @@index([categoryId])
 }
 
 model Review {
@@ -81,11 +80,76 @@ model Review {
 }
 
 model Order {
+  id              String      @id @default(cuid())
+  userId          String
+  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orderItems      OrderItem[]
+  total           Float
+  status          OrderStatus @default(PENDING)
+  shippingAddress String
+  billingAddress  String
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  @@index([userId])
+}
+
+model OrderItem {
   id        String   @id @default(cuid())
-  items     String[] // JSON serialized order items
-  total     Float
-  status    String   @default("pending")
-  userId    String
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id])
+  quantity  Int
+  price     Float
+  createdAt DateTime @default(now())
+
+  @@index([orderId])
+  @@index([productId])
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+model Cart {
+  id        String     @id @default(cuid())
+  userId    String     @unique
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items     CartItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model CartItem {
+  id        String   @id @default(cuid())
+  cartId    String
+  cart      Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quantity  Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@unique([cartId, productId])
+  @@index([cartId])
+  @@index([productId])
+}
+
+model SellerProfile {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  shopName    String?
+  bio         String?
+  image       String?
+  verified    Boolean  @default(false)
+  rating      Float    @default(0)
+  reviewCount Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

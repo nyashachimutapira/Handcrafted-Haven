@@ -43,38 +43,60 @@ Handcrafted Haven is an innovative web application that provides a marketplace f
 ### Prerequisites
 - Node.js 18+
 - npm or yarn
-- PostgreSQL
+- PostgreSQL 12+
 
 ### Installation
 
-1. Clone the repository
+1. **Clone the repository**
 ```bash
 git clone <repository-url>
 cd handcrafted-haven
 ```
 
-2. Install dependencies
+2. **Install dependencies**
 ```bash
 npm install
 ```
 
-3. Setup environment variables
+3. **Setup environment variables**
 ```bash
 cp .env.example .env.local
 ```
 
-4. Setup database
+Then update `.env.local` with your database URL and JWT secret:
+```
+DATABASE_URL="postgresql://user:password@localhost:5432/handcrafted_haven"
+JWT_SECRET="your-super-secret-key"
+```
+
+4. **Setup database**
 ```bash
-npx prisma migrate dev
+# Create and run migrations
+npm run db:migrate
+
+# Seed database with test data
 npm run db:seed
 ```
 
-5. Run development server
+5. **Run development server**
 ```bash
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the app.
+
+### Test Credentials
+
+After seeding, use these credentials:
+
+**Buyer Account:**
+- Email: `buyer@example.com`
+- Password: `password123`
+
+**Seller Accounts:**
+- Email: `potter@example.com` / Password: `password123`
+- Email: `jeweler@example.com` / Password: `password123`
+- Email: `weaver@example.com` / Password: `password123`
 
 ## Project Structure
 
@@ -99,12 +121,36 @@ handcrafted-haven/
 
 ## Development Standards
 
-- **Web Standards**: Valid HTML, CSS, JavaScript
-- **Performance**: Optimized loading times and core web vitals
-- **Accessibility**: WCAG 2.1 Level AA compliant
-- **SEO**: Proper meta tags, structured data
-- **Responsive**: Mobile-first design approach
-- **Code Quality**: ESLint, TypeScript strict mode
+- **Web Standards**: Valid HTML, CSS, JavaScript per WAI guidelines
+- **Performance**: Optimized loading times and core web vitals (Lighthouse 90+)
+- **Accessibility**: WCAG 2.1 Level AA compliant with:
+  - Semantic HTML throughout
+  - ARIA labels and roles
+  - Keyboard navigation support
+  - Color contrast ratios 4.5:1
+  - Screen reader compatibility
+  - Focus indicators on all interactive elements
+- **SEO**: Proper meta tags, structured data, sitemap, robots.txt
+- **Responsive**: Mobile-first design approach (tested on 375px, 768px, 1024px, 1440px)
+- **Code Quality**: ESLint, TypeScript strict mode, code splitting
+- **Testing**: Unit tests and accessibility audits
+
+## API Documentation
+
+See [API_DOCUMENTATION.md](API_DOCUMENTATION.md) for detailed API endpoints and usage examples.
+
+## Database Schema
+
+The application uses PostgreSQL with Prisma ORM. Key models include:
+- **User**: Authentication, roles (BUYER, SELLER, ADMIN)
+- **Product**: Product listings with images, pricing, stock
+- **Review**: Ratings and reviews on products
+- **Cart**: Shopping cart management
+- **Order**: Order history and tracking
+- **SellerProfile**: Enhanced seller information and ratings
+- **Category**: Product categorization
+
+Run `npx prisma studio` to explore the database with a GUI.
 
 ## Contributing
 

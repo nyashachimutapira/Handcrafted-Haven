@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-import bcryptjs from 'bcryptjs';
+const { PrismaClient } = require('@prisma/client');
+const bcryptjs = require('bcryptjs');
 
 const prisma = new PrismaClient();
 
@@ -40,7 +40,7 @@ async function seed() {
     console.log('✅ Categories created:', categories.length);
 
     // Hash password helper
-    const hashPassword = (pwd: string) => bcryptjs.hash(pwd, 10);
+    const hashPassword = (pwd) => bcryptjs.hash(pwd, 10);
 
     // Create buyer user
     const buyer = await prisma.user.create({
@@ -192,7 +192,7 @@ async function seed() {
           productId: product.id,
           userId: buyer.id,
           rating: 5 - i,
-          text: `Great handcrafted item! Quality and craftsmanship are excellent.`,
+          text: 'Great handcrafted item! Quality and craftsmanship are excellent.',
         },
       });
     }
