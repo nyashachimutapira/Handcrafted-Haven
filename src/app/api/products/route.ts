@@ -71,12 +71,12 @@ export async function GET(request: NextRequest) {
     ]);
 
     return NextResponse.json({
-      products: products.map((p) => ({
+      products: products.map((p: any) => ({
         ...p,
         averageRating:
           p.reviews.length > 0
             ? (
-                p.reviews.reduce((sum, r) => sum + r.rating, 0) /
+                p.reviews.reduce((sum: number, r: any) => sum + r.rating, 0) /
                 p.reviews.length
               ).toFixed(1)
             : 0,

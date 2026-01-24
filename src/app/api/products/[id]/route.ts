@@ -5,7 +5,7 @@ import { verifyToken } from "@/lib/auth";
 const prisma = new PrismaClient();
 
 export async function GET(
-  request: NextRequest,
+  _request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
@@ -33,7 +33,7 @@ export async function GET(
     const averageRating =
       product.reviews.length > 0
         ? (
-            product.reviews.reduce((sum, r) => sum + r.rating, 0) /
+            product.reviews.reduce((sum: number, r: any) => sum + r.rating, 0) /
             product.reviews.length
           ).toFixed(1)
         : 0;

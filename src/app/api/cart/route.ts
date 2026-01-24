@@ -40,15 +40,12 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const total = cart.items.reduce(
-      (sum, item) => sum + item.product.price * item.quantity,
-      0
-    );
+    const total = cart.items.reduce((sum: number, item: any) => sum + item.product.price * item.quantity, 0);
 
     return NextResponse.json({
       ...cart,
       total,
-      itemCount: cart.items.reduce((sum, item) => sum + item.quantity, 0),
+      itemCount: cart.items.reduce((sum: number, item: any) => sum + item.quantity, 0),
     });
   } catch (error) {
     console.error("Cart fetch error:", error);

@@ -15,7 +15,7 @@ export async function GET() {
     });
 
     return NextResponse.json(
-      categories.map((cat) => ({
+      categories.map((cat: any) => ({
         ...cat,
         productCount: cat.products.length,
         products: undefined,
