@@ -4,7 +4,7 @@
   "description": "A web platform for artisans and crafters to showcase and sell handcrafted items",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "db:migrate": "node scripts/migrate.js",
