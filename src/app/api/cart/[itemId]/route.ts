@@ -6,8 +6,9 @@ const prisma = new PrismaClient();
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { itemId: string } }
+  { params }: { params: Promise<{ itemId: string }> }
 ) {
+  const { itemId } = await params;
   try {
     const authHeader = request.headers.get("authorization");
     const token = authHeader?.split(" ")[1];
@@ -28,7 +29,7 @@ export async function DELETE(
     }
 
     const cartItem = await prisma.cartItem.findUnique({
-      where: { id: params.itemId },
+      where: { id: itemId },
       include: { cart: true },
     });
 
@@ -47,7 +48,7 @@ export async function DELETE(
     }
 
     await prisma.cartItem.delete({
-      where: { id: params.itemId },
+      where: { id: itemId },
     });
 
     return NextResponse.json({ message: "Item removed from cart" });
@@ -62,8 +63,9 @@ export async function DELETE(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { itemId: string } }
+  { params }: { params: Promise<{ itemId: string }> }
 ) {
+  const { itemId } = await params;
   try {
     const authHeader = request.headers.get("authorization");
     const token = authHeader?.split(" ")[1];
@@ -93,7 +95,7 @@ export async function PUT(
     }
 
     const cartItem = await prisma.cartItem.findUnique({
-      where: { id: params.itemId },
+      where: { id: itemId },
       include: { cart: true },
     });
 
@@ -112,7 +114,7 @@ export async function PUT(
     }
 
     const updated = await prisma.cartItem.update({
-      where: { id: params.itemId },
+      where: { id: itemId },
       data: { quantity },
       include: { product: true },
     });

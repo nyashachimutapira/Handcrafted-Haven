@@ -6,11 +6,12 @@ const prisma = new PrismaClient();
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  try {
-    const product = await prisma.product.findUnique({
-      where: { id: params.id },
+  const { id } = await params;
+   try {
+     const product = await prisma.product.findUnique({
+       where: { id },
       include: {
         seller: {
           include: { sellerProfile: true },
@@ -53,8 +54,9 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     const authHeader = request.headers.get("authorization");
     const token = authHeader?.split(" ")[1];
@@ -75,7 +77,7 @@ export async function PUT(
     }
 
     const product = await prisma.product.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!product) {
@@ -96,7 +98,7 @@ export async function PUT(
       await request.json();
 
     const updated = await prisma.product.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         ...(title && { title }),
         ...(description && { description }),
@@ -124,8 +126,9 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     const authHeader = request.headers.get("authorization");
     const token = authHeader?.split(" ")[1];
@@ -146,7 +149,7 @@ export async function DELETE(
     }
 
     const product = await prisma.product.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!product) {
@@ -164,7 +167,7 @@ export async function DELETE(
     }
 
     await prisma.product.delete({
-      where: { id: params.id },
+      where: { id },
     });
 
     return NextResponse.json({ message: "Product deleted" });
