@@ -2,8 +2,10 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { useState } from 'react';
 
 export default function Footer() {
+  const [email, setEmail] = useState('');
   const currentYear = new Date().getFullYear();
 
   return (
@@ -14,12 +16,12 @@ export default function Footer() {
           <div>
             <div className="flex items-center mb-4">
               <Image
-                src="/images/haven.webp"
-                alt="Handcrafted Haven Logo"
-                width={40}
-                height={40}
-                className="h-10 w-auto"
-              />
+                  src="/images/haven.webp"
+                  alt="Handcrafted Haven Logo"
+                  width={40}
+                  height={40}
+                  style={{ width: 'auto', height: 'auto' }}
+                />
               <h3 className="text-xl font-bold ml-2">Haven</h3>
             </div>
             <p className="text-secondary">
@@ -113,8 +115,11 @@ export default function Footer() {
               <input
                 type="email"
                 placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="flex-1 px-4 py-2 rounded text-gray-800"
                 aria-label="Email for newsletter"
+                suppressHydrationWarning
               />
               <button
                 className="bg-accent hover:bg-secondary text-white px-6 py-2 rounded transition"

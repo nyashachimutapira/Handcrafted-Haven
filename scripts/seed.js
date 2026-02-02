@@ -125,7 +125,7 @@ async function seed() {
           'Unique clay bowl handmade with organic shapes and natural glazing. Great for dining or decoration.',
         price: 45.0,
         stock: 15,
-        images: ['/images/clay-bowl.jpg'],
+        images: ['/images/Rustic Clay Bowl.jpg'],
       },
       {
         sellerId: sellers[1].id,
@@ -135,7 +135,7 @@ async function seed() {
           'Elegant sterling silver bracelet with intricate hand-stamped details. A timeless piece of jewelry.',
         price: 120.0,
         stock: 5,
-        images: ['/images/silver-bracelet.jpg'],
+        images: ['/images/Silver Handcrafted Bracelet.jpg'],
       },
       {
         sellerId: sellers[1].id,
@@ -145,7 +145,7 @@ async function seed() {
           'Colorful handmade necklace using natural gemstones and beads. Each piece is unique.',
         price: 65.0,
         stock: 20,
-        images: ['/images/beaded-necklace.jpg'],
+        images: ['/images/Beaded Necklace.jpg'],
       },
       {
         sellerId: sellers[2].id,
@@ -165,7 +165,37 @@ async function seed() {
           'Soft and elegant scarf hand-dyed with natural botanical dyes. Perfect for any season.',
         price: 55.0,
         stock: 25,
-        images: ['/images/hand-dyed-scarf.jpg'],
+        images: ['/images/Hand-dyed Scarf.jpg'],
+      },
+      {
+        sellerId: sellers[0].id,
+        categoryId: categories[3].id,
+        title: 'Wood Cutting Board',
+        description:
+          'Premium handcrafted wooden cutting board made from sustainable materials. Durable and beautiful for your kitchen.',
+        price: 75.0,
+        stock: 12,
+        images: ['/images/wood-cutting-board.jpg'],
+      },
+      {
+        sellerId: sellers[1].id,
+        categoryId: categories[1].id,
+        title: 'Home Decoration Set',
+        description:
+          'Beautiful handmade home decoration pieces perfect for modern or rustic interiors.',
+        price: 95.0,
+        stock: 6,
+        images: ['/images/homedeco.jpg'],
+      },
+      {
+        sellerId: sellers[2].id,
+        categoryId: categories[4].id,
+        title: 'Handmade Glasswork',
+        description:
+          'Stunning glasswork pieces created using traditional techniques. Perfect as wall art or decorative pieces.',
+        price: 110.0,
+        stock: 4,
+        images: ['/images/glasswork.jpg'],
       },
     ];
 

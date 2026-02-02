@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -51,7 +51,7 @@ model Product {
   category    Category   @relation(fields: [categoryId], references: [id])
   sellerId    String
   seller      User       @relation(fields: [sellerId], references: [id], onDelete: Cascade)
-  images      String[]
+  images      Json       @default("[]")
   stock       Int        @default(0)
   published   Boolean    @default(false)
   createdAt   DateTime   @default(now())

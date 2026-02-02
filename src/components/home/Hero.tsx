@@ -1,3 +1,7 @@
+'use client';
+
+import Link from 'next/link';
+
 export default function Hero() {
   return (
     <section className="w-full bg-gradient-to-b from-secondary to-light-bg py-20">
@@ -10,12 +14,16 @@ export default function Hero() {
             Discover unique, handcrafted items from talented artisans around the world. Support local creators and find treasures that tell a story.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-primary hover:bg-accent text-white font-semibold py-3 px-8 rounded transition duration-300">
-              Browse Products
-            </button>
-            <button className="bg-white border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold py-3 px-8 rounded transition duration-300">
-              Become a Seller
-            </button>
+            <Link href="/products">
+              <button className="bg-primary hover:bg-accent text-white font-semibold py-3 px-8 rounded transition duration-300">
+                Browse Products
+              </button>
+            </Link>
+            <Link href="/auth/register?role=SELLER">
+              <button className="bg-white border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold py-3 px-8 rounded transition duration-300">
+                Become a Seller
+              </button>
+            </Link>
           </div>
         </div>
       </div>

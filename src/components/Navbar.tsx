@@ -2,11 +2,14 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/lib/hooks/useAuth';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
+  const { user, logout } = useAuth();
 
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
@@ -15,13 +18,13 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center no-underline">
             <Image
-              src="/images/haven.webp"
-              alt="Handcrafted Haven Logo"
-              width={40}
-              height={40}
-              priority
-              className="h-10 w-auto"
-            />
+               src="/images/haven.webp"
+               alt="Handcrafted Haven Logo"
+               width={40}
+               height={40}
+               priority
+               style={{ width: 'auto', height: 'auto' }}
+             />
             <span className="text-xl font-bold text-primary ml-2">
               Haven
             </span>
@@ -35,7 +38,7 @@ export default function Navbar() {
             <Link href="/categories" className="text-gray-700 no-underline hover:text-primary transition">
               Categories
             </Link>
-            {isLoggedIn && (
+            {user && user.role === 'SELLER' && (
               <Link href="/dashboard" className="text-gray-700 no-underline hover:text-primary transition">
                 Dashboard
               </Link>
@@ -52,13 +55,19 @@ export default function Navbar() {
                 0
               </span>
             </Link>
-            {isLoggedIn ? (
+            {user ? (
               <>
-                <Link href="/dashboard" className="text-gray-700 hover:text-primary">
-                  Profile
-                </Link>
+                <span className="text-gray-700 text-sm">{user.name}</span>
+                {user.role === 'SELLER' && (
+                  <Link href="/dashboard" className="text-gray-700 hover:text-primary">
+                    Dashboard
+                  </Link>
+                )}
                 <button
-                  onClick={() => setIsLoggedIn(false)}
+                  onClick={() => {
+                    logout();
+                    router.push('/');
+                  }}
                   className="bg-accent hover:bg-primary text-white px-4 py-2 rounded transition"
                 >
                   Logout
@@ -66,12 +75,12 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <Link href="/login">
+                <Link href="/auth/login">
                   <button className="text-primary border border-primary px-4 py-2 rounded hover:bg-primary hover:text-white transition">
                     Login
                   </button>
                 </Link>
-                <Link href="/register">
+                <Link href="/auth/register">
                   <button className="bg-primary hover:bg-accent text-white px-4 py-2 rounded transition">
                     Register
                   </button>
@@ -112,29 +121,37 @@ export default function Navbar() {
             <Link href="/categories" className="block text-gray-700 hover:text-primary">
               Categories
             </Link>
-            {isLoggedIn && (
+            {user && user.role === 'SELLER' && (
               <Link href="/dashboard" className="block text-gray-700 hover:text-primary">
                 Dashboard
               </Link>
             )}
             <hr className="my-3" />
-            {isLoggedIn ? (
+            {user ? (
               <>
-                <Link href="/dashboard" className="block text-gray-700 hover:text-primary">
-                  Profile
-                </Link>
-                <button className="w-full text-left bg-accent hover:bg-primary text-white px-4 py-2 rounded transition">
+                {user.role === 'SELLER' && (
+                  <Link href="/dashboard" className="block text-gray-700 hover:text-primary mb-3">
+                    Dashboard
+                  </Link>
+                )}
+                <button 
+                  onClick={() => {
+                    logout();
+                    router.push('/');
+                  }}
+                  className="w-full text-left bg-accent hover:bg-primary text-white px-4 py-2 rounded transition"
+                >
                   Logout
                 </button>
               </>
             ) : (
               <>
-                <Link href="/login">
+                <Link href="/auth/login">
                   <button className="w-full text-primary border border-primary px-4 py-2 rounded hover:bg-primary hover:text-white transition">
                     Login
                   </button>
                 </Link>
-                <Link href="/register">
+                <Link href="/auth/register">
                   <button className="w-full bg-primary hover:bg-accent text-white px-4 py-2 rounded transition">
                     Register
                   </button>
