@@ -279,7 +279,7 @@ export default function CheckoutForm({ cartTotal, itemCount }: CheckoutFormProps
                 required
                 className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
                 placeholder="MM/YY"
-                maxLength="5"
+                maxLength={5}
               />
             </div>
 
@@ -293,7 +293,7 @@ export default function CheckoutForm({ cartTotal, itemCount }: CheckoutFormProps
                 required
                 className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
                 placeholder="123"
-                maxLength="4"
+                maxLength={4}
               />
             </div>
           </div>
