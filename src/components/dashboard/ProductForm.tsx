@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import api from '@/lib/api';
 
@@ -43,7 +43,7 @@ export default function ProductForm({ productId, initialData, categories = [] }:
   const removeImageField = (index: number) => {
     setFormData((prev) => ({
       ...prev,
-      images: prev.images.filter((_, i) => i !== index),
+      images: prev.images.filter((_: string, i: number) => i !== index),
     }));
   };
 
@@ -54,7 +54,7 @@ export default function ProductForm({ productId, initialData, categories = [] }:
 
     try {
       // Filter out empty image URLs
-      const filteredImages = formData.images.filter((img) => img.trim() !== '');
+      const filteredImages = formData.images.filter((img: string) => img.trim() !== '');
 
       const payload = {
         ...formData,
@@ -182,7 +182,7 @@ export default function ProductForm({ productId, initialData, categories = [] }:
       <div>
         <label className="block font-semibold mb-2">Product Images</label>
         <div className="space-y-2">
-          {formData.images.map((image, index) => (
+          {formData.images.map((image: string, index: number) => (
             <div key={index} className="flex gap-2">
               <input
                 type="url"

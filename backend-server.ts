@@ -3,7 +3,7 @@ import express, { Express, Request, Response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { PrismaClient } from '@prisma/client';
-import { comparePasswords, createToken } from './lib/auth';
+import { comparePasswords, createToken, hashPassword } from './src/lib/auth';
 
 dotenv.config();
 
@@ -73,7 +73,6 @@ app.post('/api/auth/register', async (req: Request, res: Response) => {
       return res.status(409).json({ error: "User already exists" });
     }
 
-    const { hashPassword } = await import('./lib/auth');
     const hashedPassword = await hashPassword(password);
 
     const user = await prisma.user.create({
@@ -103,7 +102,7 @@ app.post('/api/auth/register', async (req: Request, res: Response) => {
 });
 
 // Products Routes
-app.get('/api/products', async (req: Request, res: Response) => {
+app.get('/api/products', async (_req: Request, res: Response) => {
   try {
     const products = await prisma.product.findMany({
       include: { seller: true, category: true },
@@ -118,7 +117,7 @@ app.get('/api/products/:id', async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const product = await prisma.product.findUnique({
-      where: { id },
+      where: { id: String(id) },
       include: { seller: true, category: true, reviews: true },
     });
 
@@ -134,7 +133,7 @@ app.get('/api/products/:id', async (req: Request, res: Response) => {
 
 app.post('/api/products', async (req: Request, res: Response) => {
   try {
-    const { title, description, price, categoryId, sellerId, imageUrl } = req.body;
+    const { title, description, price, categoryId, sellerId, images, stock } = req.body;
 
     const product = await prisma.product.create({
       data: {
@@ -143,7 +142,8 @@ app.post('/api/products', async (req: Request, res: Response) => {
         price,
         categoryId,
         sellerId,
-        imageUrl,
+        images: images || [],
+        stock: stock || 0,
       },
     });
 
@@ -154,7 +154,7 @@ app.post('/api/products', async (req: Request, res: Response) => {
 });
 
 // Categories Routes
-app.get('/api/categories', async (req: Request, res: Response) => {
+app.get('/api/categories', async (_req: Request, res: Response) => {
   try {
     const categories = await prisma.category.findMany();
     return res.json(categories);
@@ -168,8 +168,8 @@ app.get('/api/reviews/:productId', async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
     const reviews = await prisma.review.findMany({
-      where: { productId },
-      include: { buyer: true },
+      where: { productId: String(productId) },
+      include: { user: true },
     });
     return res.json(reviews);
   } catch (error) {
@@ -179,14 +179,14 @@ app.get('/api/reviews/:productId', async (req: Request, res: Response) => {
 
 app.post('/api/reviews', async (req: Request, res: Response) => {
   try {
-    const { productId, buyerId, rating, comment } = req.body;
+    const { productId, userId, rating, text } = req.body;
 
     const review = await prisma.review.create({
       data: {
         productId,
-        buyerId,
+        userId,
         rating,
-        comment,
+        text,
       },
     });
 
@@ -197,7 +197,7 @@ app.post('/api/reviews', async (req: Request, res: Response) => {
 });
 
 // Health Check
-app.get('/health', (req: Request, res: Response) => {
+app.get('/health', (_req: Request, res: Response) => {
   res.json({ status: 'Backend is running' });
 });
 
