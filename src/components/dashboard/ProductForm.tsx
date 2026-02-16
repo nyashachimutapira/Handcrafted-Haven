@@ -43,7 +43,7 @@ export default function ProductForm({ productId, initialData, categories = [] }:
   const removeImageField = (index: number) => {
     setFormData((prev) => ({
       ...prev,
-      images: prev.images.filter((_: string, i: number) => i !== index),
+      images: prev.images.filter((_: string, i) => i !== index),
     }));
   };
 
